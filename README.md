@@ -1,16 +1,17 @@
-# food_app
+# Recipe app
 
-A recipe app.
+A simple Recipe App using Tasty API to fetch recipe information. Part of Flutter DevCamp 2022 <3
+
+## Screenshots
+
+![image](https://user-images.githubusercontent.com/54640700/193327435-05d7dd74-16ca-45dd-bf18-df85fea0b9d1.png)
+
+
 
 ## Getting Started
+For security reasons, Api key is not included in this repository. To run the project, create a file /lib/api/keys.dart in such a format to successfully run the app.
+```
+String tasty_key = "your key";
+String tasty_host = "tasty.p.rapidapi.com";
+```
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
