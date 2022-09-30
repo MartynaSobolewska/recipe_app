@@ -4,7 +4,7 @@ A simple Recipe App using Tasty API to fetch recipe information. Part of Flutter
 
 ## Screenshots
 
-![image](https://user-images.githubusercontent.com/54640700/193327435-05d7dd74-16ca-45dd-bf18-df85fea0b9d1.png)
+![image](https://user-images.githubusercontent.com/54640700/193363913-0cbfbfc7-e451-4126-b1a4-d78ce00098b0.png)
 
 
 
