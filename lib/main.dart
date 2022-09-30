@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:food_app/RecipeDetails.dart';
 import 'package:food_app/api/urls.dart';
 import 'package:food_app/colours/Colours.dart';
 import 'package:food_app/models/User.dart';
@@ -36,7 +37,10 @@ class MyApp extends StatelessWidget {
           headline3: TextStyle(fontSize: 20.0, color: Colors.grey),
           headline4: TextStyle(
               fontSize: 17.0, fontWeight: FontWeight.bold, color: Colors.white),
+          headline5: TextStyle(
+              fontSize: 22.0, fontWeight: FontWeight.w800, color: Color(0xFF16354E)),
           bodyText1: TextStyle(fontSize: 14.0, color: Colors.white),
+          bodyText2: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600, color: Colors.black),
         ),
       ),
       home: HomePage(),
@@ -60,6 +64,7 @@ class _HomePageState extends State<HomePage> {
   Future getFeed() async {
     if (response == null) {
       http.Response res = await http.get(Uri.parse(feedUrl));
+      print("GETTING FEED!!!");
 
       if (res.statusCode == 200) {
         Map<String, dynamic> resjson = json.decode(res.body);
@@ -154,87 +159,99 @@ class _HomePageState extends State<HomePage> {
                       }
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 200,
-                          width: 280,
-                          decoration: BoxDecoration(
-                            color: curr,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: 250,
-                                margin: EdgeInsets.all(10),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Image(
-                                    image: NetworkImage(results![0]
-                                        .items![index]
-                                        .thumbnailUrl!),
-                                    height: 200.0,
-                                    fit: BoxFit.cover,
+                        child: InkWell(
+
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (_) => RecipeDetails(
+                                    recipe: results![0].items![index],
+                                    colour: curr,
+                                )
+                            ));
+                          },
+
+                          child: Container(
+                            height: 200,
+                            width: 280,
+                            decoration: BoxDecoration(
+                              color: curr,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width: 250,
+                                  margin: EdgeInsets.all(10),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Image(
+                                      image: NetworkImage(results![0]
+                                          .items![index]
+                                          .thumbnailUrl!),
+                                      height: 200.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      results![0].items![index].name!,
-                                      style:
-                                          Theme.of(context).textTheme.headline4,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            const Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: Icon(
-                                                Icons.access_time,
-                                                color: Colors.white,
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text(
+                                        results![0].items![index].name!,
+                                        style:
+                                            Theme.of(context).textTheme.headline4,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              const Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: Icon(
+                                                  Icons.access_time,
+                                                  color: Colors.white,
+                                                ),
                                               ),
-                                            ),
-                                            Text(
-                                              "${results![0].items![index].cookTimeMinutes ?? 0} mins",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1,
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: Icon(
-                                                Icons.person,
-                                                color: Colors.white,
+                                              Text(
+                                                "${results![0].items![index].cookTimeMinutes ?? 0} mins",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1,
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: Icon(
+                                                  Icons.person,
+                                                  color: Colors.white,
+                                                ),
                                               ),
-                                            ),
-                                            Text(
-                                              "${results![0].items![index].numServings!} servings",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText1,
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    )
-                                  ],
+                                              Text(
+                                                "${results![0].items![index].numServings!} servings",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1,
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       );
